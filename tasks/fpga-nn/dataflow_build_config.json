@@ -1,10 +1,20 @@
 {
   "output_dir": "out",
   "target_fps": 100000,
+  "mvau_wwidth_max": 10000,
   "synth_clk_period_ns": 10.0,
   "board": "Pynq-Z2",
+  "standalone_thresholds": false,
+  "folding_config_file": "folding_config.json",
   "shell_flow_type": "vivado_zynq",
-  "verify_steps": ["stitched_ip_rtlsim"],
+  "verify_save_rtlsim_waveforms": true,
+  "force_python_rtlsim": true,
+  "verify_steps": [
+    "initial_python",
+    "streamlined_python",
+    "folded_hls_cppsim",
+    "stitched_ip_rtlsim"
+  ],
   "generate_outputs": [
     "estimate_reports",
     "stitched_ip",

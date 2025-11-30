@@ -4,6 +4,9 @@ import subprocess
 import click
 import shutil
 
+from fpga_nn.nn.driver import NetworkDriver
+from fpga_nn.nn.net import build_net
+
 
 @click.command()
 @click.option(
@@ -26,7 +29,18 @@ def synth(xilinx_path: str, xilinx_version: str, finn_path: str):
     xilinx_env["FINN_XILINX_VERSION"] = xilinx_version
     xilinx_env["FINN_HOST_BUILD_DIR"] = build_dir.absolute().as_posix()
     cmd = f"./run-docker.sh build_dataflow {build_dir.resolve().as_posix()}"
+    net = build_net()
+    driver = NetworkDriver(
+        net,
+        batch_size=1,
+        data_store=Path.cwd() / "data",
+        cache=Path.cwd() / "cache",
+        dist=Path.cwd() / "dist",
+    )
+    driver.load_checkpoint()
+    driver.save_sample_io_pair(Path.cwd() / "build")
 
+    build_dir.mkdir(parents=True, exist_ok=True)
     shutil.copy(Path.cwd() / "dist" / "model.onnx", build_dir / "model.onnx")
     shutil.copy(
         Path.cwd() / "dataflow_build_config.json",

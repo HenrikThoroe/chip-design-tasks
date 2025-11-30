@@ -1,0 +1,17 @@
+{
+  "output_dir": "out",
+  "target_fps": 100000,
+  "synth_clk_period_ns": 10.0,
+  "board": "Pynq-Z2",
+  "shell_flow_type": "vivado_zynq",
+  "verify_steps": ["stitched_ip_rtlsim"],
+  "generate_outputs": [
+    "estimate_reports",
+    "stitched_ip",
+    "rtlsim_performance",
+    "pynq_driver",
+    "out_of_context_synth",
+    "bitfile",
+    "deployment_package"
+  ]
+}

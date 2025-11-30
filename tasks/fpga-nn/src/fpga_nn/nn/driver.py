@@ -1,8 +1,6 @@
 from pathlib import Path
 import numpy as np
 import torch
-from torchvision.datasets import MNIST
-from torchvision import transforms
 from torch.utils.data import DataLoader
 from rich.progress import track
 from torch import Tensor, no_grad, max

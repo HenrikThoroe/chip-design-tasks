@@ -26,12 +26,12 @@ module axi_lite_slave_tb;
     logic bvalid;
   	logic [DATA_WIDTH-1:0] rdata;
     logic [1:0] rresp;
-    logic bresp;
+	logic [1:0] bresp;
   	logic [DATA_WIDTH-1:0] read_data;
     logic [DATA_WIDTH-1:0] expected_data;
 
     // DUT instantiation
-    axi_regs_top #(
+    axi_lite #(
         .C_S_AXI_ADDR_WIDTH(ADDR_WIDTH),
         .C_S_AXI_DATA_WIDTH(DATA_WIDTH)
     ) dut (
@@ -39,24 +39,25 @@ module axi_lite_slave_tb;
         .s_axi_aresetn(rst_n),
         
         .s_axi_awaddr(awaddr),
+      	.s_axi_awvalid(awvalid),
+      	.s_axi_awready(awready),
+      
+      	.s_axi_araddr(araddr),
+      	.s_axi_arvalid(arvalid),
+      	.s_axi_arready(arready),
+      
         .s_axi_wdata(wdata),
         .s_axi_wstrb(wstrb),
-        .s_axi_awvalid(awvalid),
         .s_axi_wvalid(wvalid),
+      	.s_axi_wready(wready),
+      
         .s_axi_bready(bready),
-        
-        .s_axi_araddr(araddr),
-        .s_axi_arvalid(arvalid),
-        .s_axi_arready(arready),
-        .s_axi_rready(rready),
-        
-        .s_axi_awready(awready),
-        .s_axi_wready(wready),
-        .s_axi_bvalid(bvalid),
         .s_axi_bresp(bresp),
+        .s_axi_bvalid(bvalid),
         
         .s_axi_rdata(rdata),
         .s_axi_rvalid(rvalid),
+      	.s_axi_rready(rready),
         .s_axi_rresp(rresp)
     );
 
@@ -141,7 +142,8 @@ module axi_lite_slave_tb;
             $display("Test 1 Passed: Write/Read verified");
         else
             $error("Test 1 Failed: Expected %h, got %h", expected_data, read_data);
-            $finish;
+      	#20ns;
+        $finish;
 
         // Test 2: Byte-level writes
         /*axi_lite_write(32'h1000_0004, 32'hFACE, 4'b1100);

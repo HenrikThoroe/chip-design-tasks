@@ -157,10 +157,6 @@ always @(posedge s_axi_aclk)
           else if (s_axi_arvalid && !s_axi_arready)
             // Read Address Transfer is in progress. Wait for it to finish
             read_state <= READ_WAIT_FOR_ADDRESS;
-          else if (!s_axi_rvalid && s_axi_arready) begin
-            s_axi_rdata <= memory[r_addr];
-            s_axi_rvalid <= 1;
-          end
         end
         READ_WAIT_FOR_ADDRESS : begin
           if (s_axi_arready) begin

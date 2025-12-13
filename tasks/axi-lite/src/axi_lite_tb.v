@@ -29,6 +29,8 @@ module axi_lite_slave_tb;
 	logic [1:0] bresp;
   	logic [DATA_WIDTH-1:0] read_data;
     logic [DATA_WIDTH-1:0] expected_data;
+	logic [DATA_WIDTH-1:0] read_data2;
+	logic [DATA_WIDTH-1:0] expected_data2;
 
     // DUT instantiation
     axi_lite #(
@@ -123,6 +125,8 @@ module axi_lite_slave_tb;
       	$dumpfile("dump.vcd"); $dumpvars;
       	read_data <= 0;
       	expected_data <= 0;
+		    read_data2 <= 0;
+      	expected_data2 <= 0;
 
         
         // Wait for reset to complete
@@ -134,16 +138,19 @@ module axi_lite_slave_tb;
         
         // Write test data
         axi_lite_write(32'h0000_0000, 32'hDEADBEEF, 4'b1111);
+        axi_lite_write(32'h0000_0001, 32'h9EADBEEF, 4'b1111);
         
         // Read back and verify
         axi_lite_read(32'h0000_0000, read_data);
         expected_data = 32'hDEADBEEF;
-        assert(read_data == expected_data) 
+        axi_lite_read(32'h0000_0001, read_data2);
+        expected_data2 = 32'h9EADBEEF;
+        assert((read_data == expected_data) && (read_data2 == expected_data2)) 
             $display("Test 1 Passed: Write/Read verified");
         else
-            $error("Test 1 Failed: Expected %h, got %h", expected_data, read_data);
+          $error("Test 1 Failed: Expected %h, got %h; Expected %h, got %h", expected_data, read_data, expected_data2, read_data2);
       	#20ns;
-        $finish;
+            $finish;
 
         // Test 2: Byte-level writes
         /*axi_lite_write(32'h1000_0004, 32'hFACE, 4'b1100);

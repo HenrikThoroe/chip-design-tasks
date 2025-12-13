@@ -37,7 +37,7 @@ module axi_lite
 );
 //Your internal Signals
 
-reg [C_S_AXI_DATA_WIDTH-1:0] memory [2 ** C_S_AXI_ADDR_WIDTH - 1:0];
+  reg [C_S_AXI_DATA_WIDTH-1:0] memory [2 ** (C_S_AXI_ADDR_WIDTH - 5) - 1:0];
 
 reg [C_S_AXI_ADDR_WIDTH-1:0] w_addr;
 reg [C_S_AXI_ADDR_WIDTH-1:0] r_addr;
@@ -99,6 +99,7 @@ begin
             write_state <= WRITE_WAIT_FOR_ADDRESS;
           end else if (s_axi_wvalid && !s_axi_wready) begin
             // TODO: Implement strobing
+            $display("Write to %h: %h", w_addr, s_axi_wdata);
             memory[w_addr] <= s_axi_wdata;
             s_axi_wready <= 1;
           end
@@ -107,6 +108,7 @@ begin
           if (!s_axi_wvalid) begin
             write_state <= WRITE_WAITING;
           end else if (s_axi_awready) begin
+			$display("Write to %h: %h", w_addr, s_axi_wdata);
             memory[w_addr] <= s_axi_wdata;
             s_axi_wready <= 1;
             write_state <= WRITE_WAITING;
@@ -160,6 +162,7 @@ always @(posedge s_axi_aclk)
         end
         READ_WAIT_FOR_ADDRESS : begin
           if (s_axi_arready) begin
+            $display("Read from %h: %h", r_addr, memory[r_addr]);
             s_axi_rdata <= memory[r_addr];
             s_axi_rvalid <= 1;
             read_state <= READ_WAITING;

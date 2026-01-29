@@ -1,0 +1,11 @@
+// Code your design here
+`include "common_pkg.sv"
+`include "ALU.sv"
+`include "clock_divider.sv"
+`include "imm_generator.sv"
+`include "instruction_memory.sv"
+`include "program_counter.sv"
+`include "ALU_control.sv"
+`include "data_memory.sv"
+`include "register_file.sv"
+`include "control_unit.sv"

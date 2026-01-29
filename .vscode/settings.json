@@ -1,6 +1,7 @@
 {
     "conventionalCommits.scopes": [
         "nn",
-        "riscv"
+        "riscv",
+        "axi"
     ]
 }

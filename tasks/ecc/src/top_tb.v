@@ -116,9 +116,7 @@ module top_tb;
         $display("ECC Decoder Testbench");
         $display("========================================\n");
         
-        // ========================================
-        // Test Category 1: No errors 
-        // ========================================
+        // ? No errors 
         $display("\n--- Test Category 1: No Errors ---");
         
         // Test with all zeros
@@ -153,9 +151,7 @@ module top_tb;
             run_test(data_in, ecc_in, data_in, 1'b0, 1'b0, "Random pattern, no error");
         end
         
-        // ========================================
-        // Test Category 2: Single-bit errors in data 
-        // ========================================
+        // ? Single-bit errors in data 
         $display("\n--- Test Category 2: Single-bit Errors in Data ---");
         
         // Test with a known data pattern and inject errors in each data bit position
@@ -168,9 +164,7 @@ module top_tb;
                      "Single-bit error in data");
         end
         
-        // ========================================
-        // Test Category 3: Single-bit errors in ECC 
-        // ========================================
+        // ? Single-bit errors in ECC 
         $display("\n--- Test Category 3: Single-bit Errors in ECC ---");
         
         original_data = 64'hFEDCBA9876543210;
@@ -182,9 +176,7 @@ module top_tb;
                      "Single-bit error in ECC");
         end
         
-        // ========================================
-        // Test Category 4: Additional tests
-        // ========================================
+        // ? Edge cases
         $display("\n--- Test Category 4: Additional Tests ---");
         
         // Test 1: Data with single 1 bit
@@ -227,9 +219,7 @@ module top_tb;
         run_test(data_in ^ 64'h0000000100000000, ecc_in, data_in, 1'b1, 1'b1, 
                  "Error in middle bit of all-ones data");
         
-        // ========================================
-        // Display final results
-        // ========================================
+        // ? Display Results
 
         $display("\n========================================");
         $display("Test Summary");

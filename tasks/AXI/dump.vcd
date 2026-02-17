@@ -1,0 +1,374 @@
+$date
+	Mon Feb 16 12:29:19 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module axi_lite_slave_tb $end
+$var wire 1 ! wready $end
+$var wire 1 " rvalid $end
+$var wire 2 # rresp [1:0] $end
+$var wire 32 $ rdata [31:0] $end
+$var wire 1 % bvalid $end
+$var wire 2 & bresp [1:0] $end
+$var wire 1 ' awready $end
+$var wire 1 ( arready $end
+$var parameter 32 ) ADDR_WIDTH $end
+$var parameter 32 * DATA_WIDTH $end
+$var reg 32 + araddr [31:0] $end
+$var reg 1 , arvalid $end
+$var reg 32 - awaddr [31:0] $end
+$var reg 1 . awvalid $end
+$var reg 1 / bready $end
+$var reg 1 0 clk $end
+$var reg 32 1 expected_data [31:0] $end
+$var reg 32 2 read_data [31:0] $end
+$var reg 1 3 rready $end
+$var reg 1 4 rst_n $end
+$var reg 32 5 wdata [31:0] $end
+$var reg 4 6 wstrb [3:0] $end
+$var reg 1 7 wvalid $end
+$scope module dut $end
+$var wire 1 0 s_axi_aclk $end
+$var wire 32 8 s_axi_araddr [31:0] $end
+$var wire 1 4 s_axi_aresetn $end
+$var wire 1 ( s_axi_arready $end
+$var wire 1 , s_axi_arvalid $end
+$var wire 32 9 s_axi_awaddr [31:0] $end
+$var wire 1 ' s_axi_awready $end
+$var wire 1 . s_axi_awvalid $end
+$var wire 1 / s_axi_bready $end
+$var wire 2 : s_axi_bresp [1:0] $end
+$var wire 1 % s_axi_bvalid $end
+$var wire 32 ; s_axi_rdata [31:0] $end
+$var wire 1 3 s_axi_rready $end
+$var wire 2 < s_axi_rresp [1:0] $end
+$var wire 1 " s_axi_rvalid $end
+$var wire 32 = s_axi_wdata [31:0] $end
+$var wire 1 ! s_axi_wready $end
+$var wire 4 > s_axi_wstrb [3:0] $end
+$var wire 1 7 s_axi_wvalid $end
+$var wire 1 ? slv_reg_rden $end
+$var wire 1 @ slv_reg_wren $end
+$var parameter 32 A ADDR_LSB $end
+$var parameter 32 B C_S_AXI_ADDR_WIDTH $end
+$var parameter 32 C C_S_AXI_DATA_WIDTH $end
+$var parameter 32 D OPT_MEM_ADDR_BITS $end
+$var reg 1 E aw_en $end
+$var reg 32 F axi_araddr [31:0] $end
+$var reg 1 G axi_arready $end
+$var reg 32 H axi_awaddr [31:0] $end
+$var reg 1 I axi_awready $end
+$var reg 2 J axi_bresp [1:0] $end
+$var reg 1 K axi_bvalid $end
+$var reg 32 L axi_rdata [31:0] $end
+$var reg 2 M axi_rresp [1:0] $end
+$var reg 1 N axi_rvalid $end
+$var reg 1 O axi_wready $end
+$var reg 32 P pwm_counter [31:0] $end
+$var reg 1 Q pwm_out $end
+$var reg 32 R reg_data_out [31:0] $end
+$var reg 32 S slv_reg0 [31:0] $end
+$var reg 32 T slv_reg1 [31:0] $end
+$var reg 32 U slv_reg2 [31:0] $end
+$var reg 32 V slv_reg3 [31:0] $end
+$var integer 32 W byte_index [31:0] $end
+$upscope $end
+$scope task axi_lite_read $end
+$upscope $end
+$scope task axi_lite_write $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b1 D
+b100000 C
+b100000 B
+b10 A
+b100000 *
+b100000 )
+$end
+#0
+$dumpvars
+bx W
+bx V
+bx U
+bx T
+bx S
+bx R
+xQ
+bx P
+xO
+xN
+bx M
+bx L
+xK
+bx J
+xI
+bx H
+xG
+bx F
+xE
+x@
+x?
+bx >
+bx =
+bx <
+bx ;
+bx :
+bx 9
+bx 8
+x7
+bx 6
+bx 5
+04
+x3
+b0 2
+b0 1
+00
+x/
+x.
+bx -
+x,
+bx +
+x(
+x'
+bx &
+x%
+bx $
+bx #
+x"
+x!
+$end
+#5000
+b0 R
+0@
+0?
+1E
+0'
+0I
+0!
+0O
+b0 H
+b0 V
+b0 U
+b0 T
+b0 S
+b0 &
+b0 :
+b0 J
+0%
+0K
+b0 F
+0(
+0G
+b0 #
+b0 <
+b0 M
+0"
+0N
+b0 $
+b0 ;
+b0 L
+0Q
+b0 P
+10
+#10000
+00
+#15000
+10
+#20000
+00
+14
+#25000
+10
+#30000
+00
+#35000
+10
+#40000
+00
+#45000
+17
+1.
+b1111 6
+b1111 >
+b11011110101011011011111011101111 5
+b11011110101011011011111011101111 =
+b0 -
+b0 9
+10
+#50000
+00
+#55000
+1@
+1!
+1O
+0E
+1'
+1I
+10
+#60000
+00
+#65000
+b11011110101011011011111011101111 R
+0@
+0'
+0I
+0!
+0O
+b11011110101011011011111011101111 S
+1%
+1K
+1/
+07
+0.
+b100 W
+10
+#70000
+00
+#75000
+b1 P
+0%
+0K
+1E
+0/
+10
+#80000
+00
+#85000
+b10 P
+1,
+b0 +
+b0 8
+10
+#90000
+00
+#95000
+1?
+b11 P
+1(
+1G
+10
+#100000
+00
+#105000
+0?
+0(
+0G
+1"
+1N
+b11011110101011011011111011101111 $
+b11011110101011011011111011101111 ;
+b11011110101011011011111011101111 L
+b100 P
+13
+0,
+10
+#110000
+00
+#115000
+b101 P
+0"
+0N
+03
+b11011110101011011011111011101111 1
+b11011110101011011011111011101111 2
+10
+#120000
+00
+#125000
+b110 P
+17
+1.
+b11111010110011100000000011111111 5
+b11111010110011100000000011111111 =
+b100 -
+b100 9
+10
+#130000
+00
+#135000
+1@
+b111 P
+b100 H
+1!
+1O
+0E
+1'
+1I
+10
+#140000
+00
+#145000
+0@
+0'
+0I
+0!
+0O
+b11111010110011100000000011111111 T
+1%
+1K
+b1000 P
+1/
+07
+0.
+b100 W
+10
+#150000
+00
+#155000
+1Q
+b1001 P
+0%
+0K
+1E
+0/
+10
+#160000
+00
+#165000
+b1010 P
+1,
+b100 +
+b100 8
+10
+#170000
+00
+#175000
+b11111010110011100000000011111111 R
+1?
+b1011 P
+b100 F
+1(
+1G
+10
+#180000
+00
+#185000
+0?
+0(
+0G
+1"
+1N
+b11111010110011100000000011111111 $
+b11111010110011100000000011111111 ;
+b11111010110011100000000011111111 L
+b1100 P
+13
+0,
+10
+#190000
+00
+#195000
+b1101 P
+0"
+0N
+03
+b11111010110011100000000011111111 1
+b11111010110011100000000011111111 2
+10

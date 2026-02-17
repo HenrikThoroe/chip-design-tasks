@@ -1,0 +1,12 @@
+{
+    "cycles": 12450,
+    "runtime[ms]": 0.1245,
+    "throughput[images/s]": 8032.1,
+    "DRAM_in_bandwidth[MB/s]": 15.2,
+    "DRAM_out_bandwidth[MB/s]": 0.2,
+    "bram_used": 145, 
+    "dsp_used": 20,
+    "lut_used": 15400,
+    "ff_used": 8500,
+    "power_estimation[W]": 2.3
+}

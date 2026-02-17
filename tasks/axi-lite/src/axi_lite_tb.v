@@ -152,11 +152,12 @@ module axi_lite_slave_tb;
     //$finish;
 
     // Test 2: Byte-level writes
+    axi_lite_write(32'h1000_0008, 32'hABCD9988, 4'b0011);
     axi_lite_write(32'h1000_0008, 32'hFACE11FF, 4'b1100);
       
     // Read back byte-written data
     axi_lite_read(32'h1000_0008, read_data);
-    expected_data = 32'hFACE0000;
+    expected_data = 32'hFACE9988;
     assert(read_data == expected_data)
       $display("Test 2 Passed: Byte-write verified");
     else begin

@@ -139,7 +139,7 @@ module axi_lite_slave_tb;
     // Write test data
     axi_lite_write(32'h0000_0000, 32'hDEADBEEF, 4'b1111);
     axi_lite_write(32'h0000_0004, 32'h9EADBEEF, 4'b1111);
-      
+
     // Read back and verify
     axi_lite_read(32'h0000_0000, read_data);
     expected_data = 32'hDEADBEEF;
@@ -152,7 +152,7 @@ module axi_lite_slave_tb;
     //$finish;
 
     // Test 2: Byte-level writes
-    axi_lite_write(32'h1000_0008, 32'hFACE00FF, 4'b1100);
+    axi_lite_write(32'h1000_0008, 32'hFACE11FF, 4'b1100);
       
     // Read back byte-written data
     axi_lite_read(32'h1000_0008, read_data);

@@ -176,7 +176,7 @@ begin
         end
       end
       WRITE_RESPOSNE_VALID: begin
-        // Master invalidated write data, ready for new write
+        // Wait for Master to invalidat write data and get ready for new write procedure
         if (!s_axi_wvalid) write_response_state <= WRITE_RESPONSE_WAITING;
       end
     endcase

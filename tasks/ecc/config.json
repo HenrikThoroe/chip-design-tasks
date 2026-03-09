@@ -1,0 +1,16 @@
+{
+  "DESIGN_NAME": "top",
+  "VERILOG_FILES": "dir::src/*.v",
+  "PDK": "sky130A",
+  "STD_CELL_LIBRARY": "sky130_fd_sc_hd",
+  "RUN_CTS": false,
+  "CLOCK_PORT": null,
+  "FP_CORE_UTIL": 45,
+  "FP_PDN_VPITCH": 10,
+  "FP_PDN_HPITCH": 10,
+  "FP_PDN_VOFFSET": 7,
+  "FP_PDN_HOFFSET": 7,
+  "FP_PDN_SKIPTRIM": true,
+  "RUN_KLAYOUT_DRC": 1,
+  "RUN_CVC": 1
+}

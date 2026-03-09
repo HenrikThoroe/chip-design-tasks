@@ -83,7 +83,7 @@ class NetworkDriver:
         sample_input, _ = self._test_dataset[0]
         sample_input = sample_input.unsqueeze(0).to(self._device)
         sample_output = self._net(sample_input)
-        path.parent.mkdir(parents=True, exist_ok=True)
+        path.mkdir(parents=True, exist_ok=True)
 
         np.save(path / "input.npy", sample_input.cpu().detach().numpy())
         np.save(path / "expected_output.npy", sample_output.cpu().detach().numpy())

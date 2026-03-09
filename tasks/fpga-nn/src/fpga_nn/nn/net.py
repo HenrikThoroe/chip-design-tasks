@@ -1,11 +1,5 @@
 from torch import nn
-from brevitas.nn import (
-    QuantConv2d,
-    QuantLinear,
-    QuantIdentity,
-    QuantReLU,
-    QuantMaxPool2d,
-)
+from brevitas.nn import QuantConv2d, QuantLinear, QuantIdentity, QuantReLU
 
 
 def build_net():
@@ -19,7 +13,7 @@ def build_net():
             weight_bit_width=2,
         ),
         QuantReLU(bit_width=4),
-        QuantMaxPool2d(2),
+        nn.MaxPool2d(2),
         QuantConv2d(
             12,
             16,
@@ -28,7 +22,7 @@ def build_net():
             weight_bit_width=2,
         ),
         QuantReLU(bit_width=4),
-        QuantMaxPool2d(2),
+        nn.MaxPool2d(2),
         nn.Flatten(),
         QuantLinear(
             16 * 4 * 4,

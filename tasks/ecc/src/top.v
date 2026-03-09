@@ -50,13 +50,7 @@ module top (
         // -> i = 5: check pos 32-63, ...
         // -> i = 6: check pos 64-71, ...
         
-        syndrome[0] = 1'b0;
-        syndrome[1] = 1'b0;
-        syndrome[2] = 1'b0;
-        syndrome[3] = 1'b0;
-        syndrome[4] = 1'b0;
-        syndrome[5] = 1'b0;
-        syndrome[6] = 1'b0;
+        syndrome = 7'b0000000;
         
         for (i = 1; i <= 71; i = i + 1) begin
             if (i & 1)  syndrome[0] = syndrome[0] ^ received_word[i];
@@ -68,12 +62,16 @@ module top (
             if (i & 64) syndrome[6] = syndrome[6] ^ received_word[i];
         end
         
-        // * Error detection signaling
+        // * Error correction & Error detection signaling
 
+        // If syndrome is zero, bypass correction logic
         if (syndrome == 7'b0000000) begin
             // No error detected -> clear error signals
             error_detected = 1'b0;
             error_corrected = 1'b0;
+
+            // No error -> pass through original data
+            data_out = data_in;
         end else begin
             // Error detected -> set error signals
             // Because we do not have to differentiate between correcting single 
@@ -82,15 +80,7 @@ module top (
             // Correction / handling of multiple bit errors is undefined behaviour.
             error_detected = 1'b1;
             error_corrected = 1'b1;  
-        end
-        
-        // * Error correction
 
-        // If syndrome is zero, bypass correction logic
-        if (syndrome == 7'b0000000) begin
-            // No error -> pass through original data
-            data_out = data_in;
-        end else begin
             // Error detected at position indicated by syndrome value
             // Correct the error by flipping the bit at that position
             // We can use the syndrome directly, because the received word is 

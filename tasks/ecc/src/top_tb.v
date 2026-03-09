@@ -82,7 +82,7 @@ module top_tb;
             test_num = test_num + 1;
             data_in = test_data;
             ecc_in = test_ecc;
-            #10;  // Wait for decoder to finish processing
+            #10;  
             
             if (data_out === expected_data && 
                 error_detected === expected_error_det && 

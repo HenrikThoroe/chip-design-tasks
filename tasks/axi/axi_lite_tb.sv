@@ -26,9 +26,11 @@ module axi_lite_tb;
   logic bvalid;
   logic [DATA_WIDTH-1:0] rdata;
   logic [1:0] rresp;
-  logic bresp;
+  logic [1:0] bresp;
   logic [DATA_WIDTH-1:0] read_data;
   logic [DATA_WIDTH-1:0] expected_data;
+  logic [DATA_WIDTH-1:0] read_data2;
+  logic [DATA_WIDTH-1:0] expected_data2;
 
   // DUT instantiation
   axi_lite #(
@@ -39,24 +41,25 @@ module axi_lite_tb;
       .s_axi_aresetn(rst_n),
 
       .s_axi_awaddr (awaddr),
-      .s_axi_wdata  (wdata),
-      .s_axi_wstrb  (wstrb),
       .s_axi_awvalid(awvalid),
-      .s_axi_wvalid (wvalid),
-      .s_axi_bready (bready),
+      .s_axi_awready(awready),
 
       .s_axi_araddr (araddr),
       .s_axi_arvalid(arvalid),
       .s_axi_arready(arready),
-      .s_axi_rready (rready),
 
-      .s_axi_awready(awready),
-      .s_axi_wready (wready),
-      .s_axi_bvalid (bvalid),
-      .s_axi_bresp  (bresp),
+      .s_axi_wdata (wdata),
+      .s_axi_wstrb (wstrb),
+      .s_axi_wvalid(wvalid),
+      .s_axi_wready(wready),
+
+      .s_axi_bready(bready),
+      .s_axi_bresp (bresp),
+      .s_axi_bvalid(bvalid),
 
       .s_axi_rdata (rdata),
       .s_axi_rvalid(rvalid),
+      .s_axi_rready(rready),
       .s_axi_rresp (rresp)
   );
 
@@ -118,6 +121,8 @@ module axi_lite_tb;
     $dumpvars;
     read_data <= 0;
     expected_data <= 0;
+    read_data2 <= 0;
+    expected_data2 <= 0;
 
 
     // Wait for reset to complete
@@ -129,26 +134,36 @@ module axi_lite_tb;
 
     // Write test data
     axi_lite_write(32'h0000_0000, 32'hDEADBEEF, 4'b1111);
+    axi_lite_write(32'h0000_0004, 32'h9EADBEEF, 4'b1111);
 
     // Read back and verify
     axi_lite_read(32'h0000_0000, read_data);
     expected_data = 32'hDEADBEEF;
-    assert (read_data == expected_data) $display("Test 1 Passed: Write/Read verified");
-    else $error("Test 1 Failed: Expected %h, got %h", expected_data, read_data);
-    $finish;
+    axi_lite_read(32'h0000_0004, read_data2);
+    expected_data2 = 32'h9EADBEEF;
+    assert ((read_data == expected_data) && (read_data2 == expected_data2))
+      $display("Test 1 Passed: Write/Read verified");
+    else
+      $error(
+          "Test 1 Failed: Expected %h, got %h; Expected %h, got %h",
+          expected_data,
+          read_data,
+          expected_data2,
+          read_data2
+      );
 
     // Test 2: Byte-level writes
-    /*axi_lite_write(32'h1000_0004, 32'hFACE, 4'b1100);
-        
-        // Read back byte-written data
-        axi_lite_read(32'h1000_0004, read_data);
-        expected_data = 32'hFACE00FF;
-        assert(read_data == expected_data)
-            $display("Test 2 Passed: Byte-write verified")
-        else begin
-            $error("Test 2 Failed: Expected %h, got %h", expected_data, read_data);
-            $finish;
-        end*/
+    axi_lite_write(32'h1000_0008, 32'hFACE11FF, 4'b1100);
+
+    // Read back byte-written data
+    axi_lite_read(32'h1000_0008, read_data);
+    expected_data = 32'hFACE0000;
+    assert (read_data == expected_data) $display("Test 2 Passed: Byte-write verified");
+    else begin
+      $error("Test 2 Failed: Expected %h, got %h", expected_data, read_data);
+      $finish;
+    end
+    #20ns;
 
     $display("All tests completed successfully!");
     $dumpfile("dump.vcd");
